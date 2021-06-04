@@ -31,7 +31,7 @@ class ChipDipProductParser
     {
         $lines = $this->document->find('.item__avail');
         return array_map(function ($line) {
-            if (strpos($line->text(), 'запрос')) {
+            if (strpos($line->text(), 'запрос') || strpos($line->text(), 'доставка')) {
                 return [
                     'quantity' => 0,
                     'unit' => 'шт.',
@@ -98,6 +98,7 @@ class ChipDipProductParser
             ];
         }
         $multiple = $this->parseMultiple();
+        var_dump($this->document->find('.product_main-id span')[1]->text());
         return [
             'code' => $this->document->find('.product_main-id span')[1]->text(),
             'name' => $this->document->first('h1')->text(),

@@ -6,5 +6,5 @@ return [
     'search-by-name' => 'search',
     'search-by-code' => 'product0',
     'town-id' => '4200000900',
-    'ttl' => 100000,
+    'ttl' => 200000,
 ];
