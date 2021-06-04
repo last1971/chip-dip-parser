@@ -1,0 +1,22 @@
+{
+    "name": "last1971/chip-dip-parser",
+    "description": "Parse the website of the ChipDip company",
+    "type": "lirbrary",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Last1971\\ChipDipParser\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Vladimir Lastovka",
+            "email": "elcopro@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4",
+        "guzzlehttp/guzzle": "^7.3",
+        "imangazaliev/didom": "^1.16"
+    }
+}
