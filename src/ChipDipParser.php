@@ -11,7 +11,6 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Response;
 
 class ChipDipParser
@@ -37,6 +36,10 @@ class ChipDipParser
     public function __construct()
     {
         $this->config = require_once __DIR__ . '/../config/chipdip.php';
+        if(file_exists(__DIR__ . '/../../../../config/chipdip.php')) {
+            $appConfig = require_once __DIR__ . '/../../../../config/chipdip.php';
+            $this->config = array_merge($this->config, $appConfig);
+        }
         $jar = CookieJar::fromArray(
             [
                 'TownId' => $this->config['town-id'],

@@ -98,7 +98,6 @@ class ChipDipProductParser
             ];
         }
         $multiple = $this->parseMultiple();
-        var_dump($this->document->find('.product_main-id span')[1]->text());
         return [
             'code' => $this->document->find('.product_main-id span')[1]->text(),
             'name' => $this->document->first('h1')->text(),
