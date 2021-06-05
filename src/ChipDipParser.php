@@ -37,7 +37,7 @@ class ChipDipParser
     {
         $this->config = require_once __DIR__ . '/../config/chipdip.php';
         if(file_exists(__DIR__ . '/../../../../config/chipdip.php')) {
-            $appConfig = require_once __DIR__ . '/../../../../config/chipdip.php';
+            $appConfig = require __DIR__ . '/../../../../config/chipdip.php';
             $this->config = array_merge($this->config, $appConfig);
         }
         $jar = CookieJar::fromArray(
