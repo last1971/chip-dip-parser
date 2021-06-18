@@ -66,15 +66,26 @@ class ChipDipProductParser
      */
     private function parsePrices(int $multiple): array
     {
-        $ret = [
+         $ret = [
             [
                 'min' => $multiple,
-                'price' => floatval($this->document->first('.ordering-price-w .ordering__value')->text()),
+                'price' => floatval(
+                    preg_replace(
+                        '/[^\d.,]/',
+                        '',
+                        $this->document->first('.ordering-price-w .ordering__value')->text())
+                ),
                 'valute' => 'RUB',
             ]
         ];
         foreach ($this->document->find('.ordering__discount') as $discount) {
-            $price = floatval($discount->first('.price')->text());
+            $price = floatval(
+                preg_replace(
+                    '/[^\d.,]/',
+                    '',
+                    $discount->first('.price')->text()
+                )
+            );
             if ($price > 0) {
                 $ret[] = [
                     'min' => intval(explode(' ', $discount->first('b')->text())[0]),

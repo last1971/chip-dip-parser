@@ -59,15 +59,23 @@ class ChipDipParser
      */
     private function byNameRequest(string $search): ChipDipParser
     {
-        $this->response = $this->client->request(
-            'GET',
-            $this->config['search-by-name'],
-            [
-                'query' => [
-                    'searchtext' => $search
+        try {
+            $this->response = $this->client->request(
+                'GET',
+                $this->config['search-by-name'],
+                [
+                    'query' => [
+                        'searchtext' => $search
+                    ]
                 ]
-            ]
-        );
+            );
+        } catch (ClientException $e) {
+            if ($e->getCode() === 404) {
+                $this->response = $e->getResponse();
+            } else {
+                throw $e;
+            }
+        }
         return $this;
     }
 
