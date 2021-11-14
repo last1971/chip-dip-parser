@@ -31,25 +31,26 @@ class ChipDipProductParser
     {
         $lines = $this->document->find('.item__avail');
         return array_map(function ($line) {
-            if (strpos($line->text(), 'запрос') || strpos($line->text(), 'доставка')) {
+            $text = $line->text();
+            if (strpos($text, 'запрос') || strpos($text, 'доставка')) {
                 return [
                     'quantity' => 0,
                     'unit' => 'шт.',
                     'reason' => 'Not availibale'
                 ];
             }
-            if (strpos($line->text(), '> 1 млн. шт.')) {
+            if (strpos($text, '1 млн. шт.')) {
                 return [
                     'quantity' => 1000000,
                     'unit' => 'шт.',
-                    'reason' => str_replace($line->first('b')->text(), '', $line->text()),
+                    'reason' => str_replace($line->first('b')->text(), '', $text),
                 ];
             }
             $valueUnit = explode(' ', $line->first('b')->text());
             return [
                 'quantity' => $valueUnit[0],
                 'unit' =>  $valueUnit[1],
-                'reason' => str_replace($line->first('b')->text(), '', $line->text()),
+                'reason' => str_replace($line->first('b')->text(), '', $text),
             ];
         }, $lines);
     }
