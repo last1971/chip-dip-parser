@@ -38,11 +38,18 @@ class ChipDipProductParser
                     'reason' => 'Not availibale'
                 ];
             }
+            if (strpos($line->text(), '> 1 млн. шт.')) {
+                return [
+                    'quantity' => 1000000,
+                    'unit' => 'шт.',
+                    'reason' => str_replace($line->first('b')->text(), '', $line->text()),
+                ];
+            }
             $valueUnit = explode(' ', $line->first('b')->text());
             return [
                 'quantity' => $valueUnit[0],
                 'unit' =>  $valueUnit[1],
-                'reason' => str_replace($line->first('b')->text(), '', $line->text())
+                'reason' => str_replace($line->first('b')->text(), '', $line->text()),
             ];
         }, $lines);
     }
