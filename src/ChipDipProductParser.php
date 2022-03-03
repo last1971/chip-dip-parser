@@ -32,7 +32,13 @@ class ChipDipProductParser
         $lines = $this->document->find('.item__avail');
         return array_map(function ($line) {
             $text = $line->text();
-            if (strpos($text, 'запрос') || strpos($text, 'доставка')) {
+            if (
+                strpos($text, 'запрос')
+                ||
+                strpos($text, 'доставка')
+                ||
+                strpos($text, 'Нет в наличии') === 0
+            ) {
                 return [
                     'quantity' => 0,
                     'unit' => 'шт.',

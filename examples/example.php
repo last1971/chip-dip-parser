@@ -6,4 +6,4 @@ use Last1971\ChipDipParser;
 
 $test = new ChipDipParser\ChipDipParser();
 //var_dump($test->searchByCode('9000074770'));
-var_dump($test->searchByName('ascasfasdcfasdfc'));
+var_dump($test->searchByName('MMBTA42'));
