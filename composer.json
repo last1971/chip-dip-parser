@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "php": "^7.4",
+        "php": "^7.4|^8.0|^8.1",
         "guzzlehttp/guzzle": "^7.3",
         "imangazaliev/didom": "^1.16"
     }
